@@ -17,23 +17,4 @@ public class PersonaMsApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PersonaMsApplication.class, args);
 	}
-
-    @Bean
-    CommandLineRunner runner(ClienteRepository repository) {
-        return args -> {
-            var persona = new Cliente();
-            persona.setDni("12312312");
-            persona.setEdad(22);
-            persona.setGenero("M");
-            persona.setNombre("Carlos");
-            persona.setTelefono("999999999");
-            persona.setDireccion("AV. algun lugar");
-
-            persona.setClienteId("asdfsafasf");
-
-            repository.save(persona);
-
-            Persona saved = repository.findById(persona.getDni()).orElseThrow(NoSuchElementException::new);
-        };
-    }
 }

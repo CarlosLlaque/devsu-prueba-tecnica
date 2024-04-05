@@ -11,4 +11,5 @@ public class CrearClienteReq {
     private String genero;
     private String nombre;
     private String telefono;
+    private Boolean estado;
 }

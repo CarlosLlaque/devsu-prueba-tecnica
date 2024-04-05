@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.cllaque.personams.Excepcion.ConflictException;
+import com.cllaque.personams.Excepcion.GenericException;
 import com.cllaque.personams.Excepcion.NotFoundException;
 
 @ControllerAdvice
@@ -22,6 +23,12 @@ public class CustomExceptionHandler {
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<Object> handleNotFoundException(NotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorResponse(ex.getMessage()));
+    }
+
+    @ResponseBody
+    @ExceptionHandler(GenericException.class)
+    public ResponseEntity<Object> handleGenericException(GenericException ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ErrorResponse(ex.getMessage()));
     }
 
     public static class ErrorResponse {

@@ -1,27 +1,21 @@
 package com.cllaque.personams.Domain;
 
 
-import java.util.List;
-import java.util.UUID;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(schema = "banco")
 public class Cliente extends Persona{
     @Column(unique = true)
     private String clienteId;
     private String contrasena;
-    private boolean estado;
-
-    @OneToMany
-    @JoinColumn(name="dni")
-    private List<Cuenta> cuentas;
+    private Boolean estado;
 }

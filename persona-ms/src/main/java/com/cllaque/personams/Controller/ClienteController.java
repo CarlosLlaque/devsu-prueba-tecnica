@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cllaque.personams.DTO.ClienteResp;
 import com.cllaque.personams.DTO.CrearClienteReq;
-import com.cllaque.personams.Domain.Cliente;
 import com.cllaque.personams.Service.ClienteService;
+
+import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping("/clientes")
@@ -27,23 +29,25 @@ public class ClienteController {
 
     @GetMapping("/{dni}")
     @ResponseStatus(HttpStatus.OK)
-    public Cliente obtenerCliente(@PathVariable String dni){
+    public Mono<ClienteResp> obtenerCliente(@PathVariable String dni){
         return this.clienteService.obtenerCliente(dni);
     }
 
     @PostMapping("/crear")
-    public Cliente crearCliente(@RequestBody CrearClienteReq req){
+    @ResponseStatus(HttpStatus.CREATED)
+    public Mono<ClienteResp> crearCliente(@RequestBody CrearClienteReq req){
         return this.clienteService.crearCliente(req);
     }
 
     @PutMapping("/actualizar")
     @ResponseStatus(HttpStatus.OK)
-    public Cliente actualizarCliente(@RequestBody CrearClienteReq req){
+    public Mono<Void> actualizarCliente(@RequestBody CrearClienteReq req){
         return this.clienteService.actualizarCliente(req);
     }
 
     @DeleteMapping("/{dni}")
-    public void eliminarCliente(@PathVariable String dni){
-        this.clienteService.eliminarCliente(dni);
+    @ResponseStatus(HttpStatus.OK)
+    public Mono<Void> eliminarCliente(@PathVariable String dni){
+        return this.clienteService.eliminarCliente(dni);
     }
 }

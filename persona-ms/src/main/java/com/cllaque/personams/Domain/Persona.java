@@ -3,7 +3,6 @@ package com.cllaque.personams.Domain;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
-
 @Data
 @MappedSuperclass
 public class Persona {
