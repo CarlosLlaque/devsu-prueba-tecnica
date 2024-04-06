@@ -1,0 +1,412 @@
+{
+	"info": {
+		"_postman_id": "c34065ef-c376-4ab0-9f57-58d948dd2137",
+		"name": "Devsu-prueba-tecnica",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11899303"
+	},
+	"item": [
+		{
+			"name": "Cliente",
+			"item": [
+				{
+					"name": "Obtener cliente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9080/clientes/12312312",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"clientes",
+								"12312312"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear cliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"edad\":15,\n    \"contrasena\":\"1234\",\n    \"direccion\":\"Av. aaa\",\n    \"dni\":\"74011345\",\n    \"genero\":\"M\",\n    \"nombre\":\"Nombre\",\n    \"telefono\":\"912912912\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9080/clientes/crear",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"clientes",
+								"crear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar cliente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9080/clientes/74011345",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"clientes",
+								"74011345"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar cliente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"edad\":24,\n    \"contrasena\":\"cccc\",\n    \"direccion\":\"Av. ccc\",\n    \"dni\":\"12312312\",\n    \"genero\":\"F\",\n    \"nombre\":\"Nombre2\",\n    \"telefono\":\"91239123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9080/clientes/actualizar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9080",
+							"path": [
+								"clientes",
+								"actualizar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cuenta",
+			"item": [
+				{
+					"name": "Crear cuenta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"dni\":\"12312312\",\n    \"saldoInicial\":621,\n    \"tipoCuenta\":\"Cuenta Corriente\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9081/cuentas/crear",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9081",
+							"path": [
+								"cuentas",
+								"crear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener cuentas por dni",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9081/cuentas/cuentasPorDni/12312312",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9081",
+							"path": [
+								"cuentas",
+								"cuentasPorDni",
+								"12312312"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener cuenta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9081/cuentas/01334344-b1ba-4d4e-a540-81c09ea1e291",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9081",
+							"path": [
+								"cuentas",
+								"01334344-b1ba-4d4e-a540-81c09ea1e291"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar cuenta",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cuentaId\":\"01334344-b1ba-4d4e-a540-81c09ea1e291\",\n    \"tipoCuenta\":\"Cuenta plusssss\",\n    \"estado\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9081/cuentas/actualizar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9081",
+							"path": [
+								"cuentas",
+								"actualizar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar cuenta",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9081/cuentas/eliminar/58989086-3c72-44f2-b6ea-e0af1269a164",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9081",
+							"path": [
+								"cuentas",
+								"eliminar",
+								"58989086-3c72-44f2-b6ea-e0af1269a164"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movimiento",
+			"item": [
+				{
+					"name": "Crear movimiento",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cuentaId\":\"01334344-b1ba-4d4e-a540-81c09ea1e291\",\n    \"tipoMovimiento\":\"Deposito\",\n    \"valor\":100\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9081/movimientos/crear",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9081",
+							"path": [
+								"movimientos",
+								"crear"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener movimiento",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9081/movimientos/0c46a43c-7735-4fce-b308-bafb50179ade",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9081",
+							"path": [
+								"movimientos",
+								"0c46a43c-7735-4fce-b308-bafb50179ade"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener movimientos por cuenta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9081/movimientos/porCuenta/01334344-b1ba-4d4e-a540-81c09ea1e291?page=0&numberOfItems=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9081",
+							"path": [
+								"movimientos",
+								"porCuenta",
+								"01334344-b1ba-4d4e-a540-81c09ea1e291"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "numberOfItems",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar movimiento",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"movimientoId\":\"3308bfb1-8432-4c7c-9eae-46e55e4ab1b3\",\n    \"tipoMovimiento\":\"Deposito interbancario\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9081/movimientos/actualizar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9081",
+							"path": [
+								"movimientos",
+								"actualizar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar movimiento",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9081/movimientos/eliminar/3308bfb1-8432-4c7c-9eae-46e55e4ab1b3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9081",
+							"path": [
+								"movimientos",
+								"eliminar",
+								"3308bfb1-8432-4c7c-9eae-46e55e4ab1b3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reporte",
+			"item": [
+				{
+					"name": "Estado de cuenta",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9081/reportes/estadoCuenta?fechaInicio=2024-04-04&fechaFin=2024-04-04&dni=12312312",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9081",
+							"path": [
+								"reportes",
+								"estadoCuenta"
+							],
+							"query": [
+								{
+									"key": "fechaInicio",
+									"value": "2024-04-04"
+								},
+								{
+									"key": "fechaFin",
+									"value": "2024-04-04"
+								},
+								{
+									"key": "dni",
+									"value": "12312312"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
