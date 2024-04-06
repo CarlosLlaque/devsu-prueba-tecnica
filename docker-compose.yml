@@ -1,0 +1,28 @@
+version: '3'
+
+networks:
+  docker_red:
+    driver: bridge
+
+services:
+  personams:
+    image: cllaquec/devsu-prueba-tecnica:persona-ms
+    networks:
+      - docker_red
+    ports:
+      - 9080:8080
+
+  cuentams:
+    image: cllaquec/devsu-prueba-tecnica:cuenta-ms
+    networks:
+      - docker_red
+    ports:
+      - 9081:8081
+
+  postgresdb:
+    image: cllaquec/devsu-prueba-tecnica:postgres-cllaque
+    networks:
+      - docker_red
+    ports:
+      - 54320:5432
+
