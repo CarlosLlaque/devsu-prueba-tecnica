@@ -38,7 +38,7 @@ public class MovimientoServiceImpl implements MovimientoService{
     @Override
     public Mono<Void> eliminarMovimiento(UUID movimientoId) {
         return Mono.fromCallable(()->this.movimientoRepository.existsById(movimientoId))
-            .map(exists->{
+            .flatMap(exists->{
                 if(!exists){
                     return Mono.error(new NotFoundException("El movimiento no existe"));
                 } else {
