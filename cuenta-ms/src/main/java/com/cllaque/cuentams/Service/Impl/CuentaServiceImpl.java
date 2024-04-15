@@ -17,6 +17,7 @@ import com.cllaque.cuentams.Excepcion.NotFoundException;
 import com.cllaque.cuentams.Repository.CuentaRepository;
 import com.cllaque.cuentams.Repository.MovimientoRepository;
 import com.cllaque.cuentams.Service.CuentaService;
+import com.netflix.discovery.EurekaClient;
 
 import jakarta.transaction.Transactional;
 import reactor.core.publisher.Flux;
@@ -27,18 +28,20 @@ public class CuentaServiceImpl implements CuentaService{
     private CuentaRepository cuentaRepository;
     private MovimientoRepository movimientoRepository;
     private WebClient.Builder builder;
-    @Value("${personams.url}")
-    private String personaUrl;
+    private EurekaClient eurekaClient;
 
     public CuentaServiceImpl(CuentaRepository cuentaRepository, MovimientoRepository movimientoRepository,
-    WebClient.Builder builder){
+    WebClient.Builder builder, EurekaClient eurekaClient){
         this.cuentaRepository = cuentaRepository;
         this.movimientoRepository = movimientoRepository;
         this.builder = builder;
+        this.eurekaClient = eurekaClient;
     }
 
     @Override
     public Mono<CuentaResp> crearCuenta(CrearCuentaReq req) {
+        var personaUrl = eurekaClient.getNextServerFromEureka("persona-ms", false).getHomePageUrl();
+
         return builder.baseUrl(personaUrl)
         .build()
         .get()
@@ -136,6 +139,7 @@ public class CuentaServiceImpl implements CuentaService{
 
     @Override
     public Flux<CuentaResp> obtenerCuentasPorDni(String dni) {
+        var personaUrl = eurekaClient.getNextServerFromEureka("persona-ms", false).getHomePageUrl();
         return builder.baseUrl(personaUrl)
         .build()
         .get()

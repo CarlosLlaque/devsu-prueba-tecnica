@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: cuenta-ms
+  
+  cloud:
+    config:
+      uri: http://localhost:8082
+      username: user
+      password: pass

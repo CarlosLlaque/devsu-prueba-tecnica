@@ -1,0 +1,16 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: file:///home/carlos/Projects/devsu-prueba-tecnica/configuration-files
+
+  security:
+    user:
+      name: user
+      password: pass
