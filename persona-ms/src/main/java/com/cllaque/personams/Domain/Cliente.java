@@ -1,21 +1,25 @@
 package com.cllaque.personams.Domain;
 
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Persistable;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
 @Getter
 @Setter
-@Table(schema = "banco")
-public class Cliente extends Persona{
-    @Column(unique = true)
+public class Cliente extends Persona implements Persistable<String>{
     private String clienteId;
     private String contrasena;
     private Boolean estado;
+    @Transient
+    private boolean isNew = true;
+    @Override
+    public String getId() {
+        return this.getDni();
+    }
+    @Override
+    public boolean isNew() {
+        return this.isNew;
+    }
 }

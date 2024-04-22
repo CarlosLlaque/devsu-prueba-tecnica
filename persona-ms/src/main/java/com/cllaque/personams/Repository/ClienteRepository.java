@@ -1,16 +1,17 @@
 package com.cllaque.personams.Repository;
 
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.r2dbc.repository.Modifying;
+import org.springframework.data.r2dbc.repository.Query;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cllaque.personams.Domain.Cliente;
 
-import jakarta.transaction.Transactional;
+import reactor.core.publisher.Mono;
 
 @Repository
-public interface ClienteRepository extends CrudRepository<Cliente, String>{
+public interface ClienteRepository extends ReactiveCrudRepository<Cliente, String>{
     @Transactional
     @Modifying
     @Query("UPDATE Cliente c SET " +
@@ -22,6 +23,6 @@ public interface ClienteRepository extends CrudRepository<Cliente, String>{
            "c.nombre = COALESCE(:nombre, c.nombre), " +
            "c.genero = COALESCE(:genero, c.genero) " +
            "WHERE c.dni = :dni")
-    void actualizarCliente(String dni, Integer edad, Boolean estado, String contrasena,
+    Mono<Void> actualizarCliente(String dni, Integer edad, Boolean estado, String contrasena,
                            String direccion, String telefono, String nombre, String genero);
 }

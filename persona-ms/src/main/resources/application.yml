@@ -1,0 +1,22 @@
+springdoc:
+  swagger-ui.path: /openapi/swagger-ui.html
+  api-docs.path: /openapi/v3/api-docs
+  packagesToScan: com.cllaque.personams
+  pathsToMatch: /**
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: persona-ms
+
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/devsujava?schema=banco
+    username: devsu
+    password: devsu
+
+logging:
+  level:
+    root: INFO
+    io.r2dbc: DEBUG

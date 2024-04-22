@@ -1,10 +1,13 @@
 package com.cllaque.personams.Domain;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.annotation.Version;
+
+import lombok.Builder;
 import lombok.Data;
+
 @Data
-@MappedSuperclass
 public class Persona {
     @Id
     private String dni;
@@ -13,4 +16,7 @@ public class Persona {
     private Integer edad;
     private String direccion;
     private String telefono;
+    @Transient
+    @Version
+    private Integer version;
 }
