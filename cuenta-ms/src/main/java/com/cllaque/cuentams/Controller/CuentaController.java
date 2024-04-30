@@ -37,6 +37,11 @@ public class CuentaController {
         return this.cuentaService.obtenerCuenta(cuentaId);
     }
 
+    @GetMapping("/obtenerSaldo/{cuentaId}")
+    public Mono<Double> obtenerSaldoCuenta(@PathVariable UUID cuentaId){
+        return this.cuentaService.obtenerSaldoCuenta(cuentaId);
+    }
+
     @GetMapping("/cuentasPorDni/{dni}")
     public Flux<CuentaResp> obtenerCuentasPorDni(@PathVariable String dni){
         return this.cuentaService.obtenerCuentasPorDni(dni);

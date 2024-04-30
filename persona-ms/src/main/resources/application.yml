@@ -12,11 +12,23 @@ spring:
     name: persona-ms
 
   r2dbc:
-    url: r2dbc:postgresql://localhost:5432/devsujava?schema=banco
-    username: devsu
-    password: devsu
+    url: r2dbc:h2:mem:///devsujava?options=DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password: 
+
+  cloud.stream:
+    defaultBinder: rabbit
+    default.contentType: application/json
+    bindings.crearClienteMessageProcessor-in-0:
+      destination: clientes
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 logging:
   level:
     root: INFO
-    io.r2dbc: DEBUG
+    org.springframework.r2dbc: DEBUG

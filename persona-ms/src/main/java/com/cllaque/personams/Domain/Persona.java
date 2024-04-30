@@ -16,7 +16,4 @@ public class Persona {
     private Integer edad;
     private String direccion;
     private String telefono;
-    @Transient
-    @Version
-    private Integer version;
 }

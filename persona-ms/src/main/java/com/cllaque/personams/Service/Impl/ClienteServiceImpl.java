@@ -29,7 +29,9 @@ public class ClienteServiceImpl implements ClienteService{
 
     @Override
     public Mono<ClienteResp> crearCliente(CrearClienteReq req) {
+        System.out.println(req.getDni());
         return this.clienteRepository.existsById(req.getDni())
+        .log()
         .flatMap(exists->{
             if(exists){
                 return Mono.error(new ConflictException("El cliente ya esta registrado"));

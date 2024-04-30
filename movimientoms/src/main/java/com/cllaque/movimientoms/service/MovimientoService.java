@@ -1,12 +1,11 @@
-package com.cllaque.cuentams.Service;
+package com.cllaque.movimientoms.service;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
-import com.cllaque.cuentams.DTO.Movimiento.ActualizarMovimientoReq;
-import com.cllaque.cuentams.DTO.Movimiento.CrearMovimientoReq;
-import com.cllaque.cuentams.Domain.Movimiento;
+import com.cllaque.movimientoms.domain.Movimiento;
+import com.cllaque.movimientoms.dto.movimiento.ActualizarMovimientoReq;
+import com.cllaque.movimientoms.dto.movimiento.CrearMovimientoReq;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

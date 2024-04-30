@@ -1,0 +1,15 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: cuenta-ms
+
+  r2dbc:
+    url: r2dbc:h2:mem:///devsujava?options=DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password: 
+
+personams:
+  url: http://localhost:8080
+movimientoms:
+  url: http://localhost:8082

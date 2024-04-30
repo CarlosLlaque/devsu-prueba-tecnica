@@ -1,4 +1,4 @@
-package com.cllaque.cuentams.Controller;
+package com.cllaque.movimientoms.controller;
 
 import java.util.List;
 import java.util.UUID;
@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cllaque.cuentams.DTO.Movimiento.ActualizarMovimientoReq;
-import com.cllaque.cuentams.DTO.Movimiento.CrearMovimientoReq;
-import com.cllaque.cuentams.Domain.Movimiento;
-import com.cllaque.cuentams.Service.MovimientoService;
+import com.cllaque.movimientoms.dto.movimiento.ActualizarMovimientoReq;
+import com.cllaque.movimientoms.dto.movimiento.CrearMovimientoReq;
+import com.cllaque.movimientoms.domain.Movimiento;
+import com.cllaque.movimientoms.service.MovimientoService;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;

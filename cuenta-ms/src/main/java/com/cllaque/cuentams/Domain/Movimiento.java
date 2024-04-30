@@ -5,18 +5,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import org.springframework.data.annotation.Id;
+
 import lombok.Data;
 
-@Entity
 @Data
-@Table(schema = "banco")
 public class Movimiento {
     @Id
-    @GeneratedValue
     private UUID movimientoId;
 
     private LocalDateTime fecha;

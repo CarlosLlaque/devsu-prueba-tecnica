@@ -3,32 +3,30 @@ package com.cllaque.cuentams.Domain;
 import java.util.List;
 import java.util.UUID;
 
-import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
+import org.springframework.data.domain.Persistable;
 
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
 import lombok.Data;
+import reactor.core.publisher.Flux;
 
-@Entity
 @Data
-@Table(schema = "banco")
-public class Cuenta {
+public class Cuenta implements Persistable{
     @Id
-    @GeneratedValue
     private UUID cuentaId;
     private String tipoCuenta;
     private Double saldoInicial;
     private Boolean estado;
 
-    @JoinColumn(name = "dni")
     private String dni;
-    @OneToMany
-    @JoinColumn(name = "cuentaId")
-    private List<Movimiento> movimientos;
+    @Transient
+    private Flux<Movimiento> movimientos;
+    @Override
+    public Object getId() {
+        return this.cuentaId;
+    }
+    @Override
+    public boolean isNew() {
+        return true;
+    }
 }

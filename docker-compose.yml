@@ -6,21 +6,21 @@ networks:
 
 services:
   personams:
-    image: cllaquec/devsu-prueba-tecnica:persona-ms
+    build: ./persona-ms
     networks:
       - docker_red
     ports:
       - 9080:8080
 
   cuentams:
-    image: cllaquec/devsu-prueba-tecnica:cuenta-ms
+    build: ./cuenta-ms
     networks:
       - docker_red
     ports:
       - 9081:8081
 
   postgresdb:
-    image: cllaquec/devsu-prueba-tecnica:postgres-cllaque
+    build: ./database
     networks:
       - docker_red
     ports:

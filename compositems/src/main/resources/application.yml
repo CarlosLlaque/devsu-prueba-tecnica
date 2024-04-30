@@ -1,0 +1,25 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: compositems
+
+  cloud.stream:
+    defaultBinder: rabbit
+    default.contentType: application/json
+
+    bindings.clientes-out-0.destination: clientes
+    bindings.cuentas-out-0.destination: cuentas
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+ms:
+  url:
+    persona: http://localhost:8080
+    cuenta: http://localhost:8081
+    movimiento: http://localhost:8082

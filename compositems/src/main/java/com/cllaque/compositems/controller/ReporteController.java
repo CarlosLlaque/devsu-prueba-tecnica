@@ -1,16 +1,13 @@
-package com.cllaque.cuentams.Controller;
+package com.cllaque.compositems.controller;
 
 import java.time.LocalDate;
-import java.util.List;
-
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cllaque.cuentams.DTO.Reporte.EstadoDeCuentaResp;
-import com.cllaque.cuentams.Domain.Cuenta;
-import com.cllaque.cuentams.Service.ReporteService;
+import com.cllaque.compositems.dto.EstadoDeCuentaResp;
+import com.cllaque.compositems.service.ReporteService;
 
 import reactor.core.publisher.Flux;
 
