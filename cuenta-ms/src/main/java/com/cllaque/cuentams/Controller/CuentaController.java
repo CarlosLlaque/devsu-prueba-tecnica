@@ -47,12 +47,6 @@ public class CuentaController {
         return this.cuentaService.obtenerCuentasPorDni(dni);
     }
 
-    @PostMapping("/crear")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Mono<CuentaResp> crearCuenta(@RequestBody CrearCuentaReq req){
-        return this.cuentaService.crearCuenta(req);
-    }
-
     @DeleteMapping("/eliminar/{cuentaId}")
     public Mono<Void> eliminarCuenta(@PathVariable UUID cuentaId){
         return this.cuentaService.eliminarCuenta(cuentaId);

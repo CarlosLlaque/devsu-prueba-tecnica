@@ -6,12 +6,12 @@ spring:
     name: persona-ms
 
   r2dbc:
-    url: r2dbc:h2:mem:///devsujava?options=DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    username: sa
-    password: 
-
+    url: r2dbc:tc:postgresql:///devsujava?TC_IMAGE_TAG=9.6.8
+    # username: sa
+    # password: 
+# jdbc:postgresql://localhost:5432/devsujava
 logging:
   level:
-    root: INFO
+    # root: DEBUG
     org.springframework.r2dbc: DEBUG
     # io.r2dbc: DEBUG

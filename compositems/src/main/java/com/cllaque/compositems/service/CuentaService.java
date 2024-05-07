@@ -8,5 +8,5 @@ import reactor.core.publisher.Mono;
 
 public interface CuentaService {
     Flux<CuentaResp> obtenerCuentasPorDni(String dni);
-    Mono<CuentaResp> creacCuenta(CrearCuentaReq req);
+    void crearCuenta(CrearCuentaReq req);
 }

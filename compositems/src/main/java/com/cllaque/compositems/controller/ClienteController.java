@@ -29,8 +29,8 @@ public class ClienteController {
     }
 
     @PostMapping("/crearCliente")
-    public Mono<Void> crearCliente(@RequestBody CrearClienteReq req){
-        return this.clienteService.crearCliente(req);
+    public void crearCliente(@RequestBody CrearClienteReq req){
+        this.clienteService.crearCliente(req);
     }
 
 

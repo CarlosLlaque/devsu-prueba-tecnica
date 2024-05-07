@@ -34,10 +34,8 @@ public class ClienteServiceImpl implements ClienteService{
     }
 
     @Override
-    public Mono<Void> crearCliente(CrearClienteReq req) {
+    public void crearCliente(CrearClienteReq req) {
         this.streamBridge.send("clientes-out-0", req);
-
-        return Mono.empty();
     }
     
 }

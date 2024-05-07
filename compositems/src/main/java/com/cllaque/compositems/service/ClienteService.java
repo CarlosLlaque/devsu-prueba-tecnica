@@ -7,5 +7,5 @@ import reactor.core.publisher.Mono;
 
 public interface ClienteService {
     Mono<Cliente> obtenerCliente(String dni);
-    Mono<Void> crearCliente(CrearClienteReq req);
+    void crearCliente(CrearClienteReq req);
 }

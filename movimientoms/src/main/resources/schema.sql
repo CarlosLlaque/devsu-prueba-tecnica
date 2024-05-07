@@ -7,7 +7,3 @@ CREATE TABLE IF NOT EXISTS movimiento (
 	tipo_movimiento varchar(255) NOT NULL,
 	CONSTRAINT movimiento_pkey PRIMARY KEY (movimiento_id)
 );
-
-
--- banco.movimiento foreign keys
-

@@ -41,11 +41,6 @@ public class MovimientoController {
         return this.movimientoService.obtenerMovimientosPorCuenta(cuentaId, page, numberOfItems);
     }
 
-    @PostMapping("/crear")
-    public Mono<Movimiento> crearMovimiento(@RequestBody CrearMovimientoReq req){
-        return this.movimientoService.crearMovimiento(req);
-    }
-
     @PutMapping("/actualizar")
     public Mono<Void> actualizarMovimiento(@RequestBody ActualizarMovimientoReq req){
         return this.movimientoService.actualizarMovimiento(req);

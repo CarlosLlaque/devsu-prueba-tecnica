@@ -8,7 +8,6 @@ public class CompositemsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(CompositemsApplication.class, args);
-
 	}
 
 }

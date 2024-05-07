@@ -2,6 +2,7 @@ package com.cllaque.compositems.service.Impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.stream.function.StreamBridge;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -18,9 +19,11 @@ public class CuentaServiceImpl implements CuentaService{
     private final WebClient.Builder webClientBuilder;
     @Value("${ms.url.cuenta}")
     private String cuentaUrl;
+    private final StreamBridge streamBridge;
 
-    public CuentaServiceImpl(WebClient.Builder builder){
+    public CuentaServiceImpl(WebClient.Builder builder, StreamBridge streamBridge){
         this.webClientBuilder = builder;
+        this.streamBridge = streamBridge;
     }
 
 
@@ -34,10 +37,8 @@ public class CuentaServiceImpl implements CuentaService{
     }
 
     @Override
-    public Mono<CuentaResp> creacCuenta(CrearCuentaReq req) {
-        // MessageBuilder
-        // TODO colas
-        throw new UnsupportedOperationException("Unimplemented method 'creacCuenta'");
+    public void crearCuenta(CrearCuentaReq req) {
+        this.streamBridge.send("cuentas-out-0", req);
     }
     
 }
