@@ -1,0 +1,49 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: cuentams
+
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/devsujava
+    username: devsu
+    password: devsu
+
+  cloud.stream:
+    defaultBinder: rabbit
+    default.contentType: application/json
+    bindings.crearCuentaMessageProcessor-in-0.destination: cuentas
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+personams:
+  url: http://localhost:8080
+movimientoms:
+  url: http://localhost:8082
+
+logging:
+  level:
+    root: INFO
+    org.springframework.r2dbc: DEBUG
+---
+spring:
+  config.activate.on-profile: docker
+  r2dbc:
+    url: r2dbc:postgresql://cuentadb:5432/cuentadb
+    username: user
+    password: pass
+
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
+
+personams:
+  url: http://personams:8080
+movimientoms:
+  url: http://movimientoms:8082

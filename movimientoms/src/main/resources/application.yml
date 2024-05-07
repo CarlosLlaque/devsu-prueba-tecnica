@@ -1,0 +1,46 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: movimientoms
+
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/devsujava
+    username: devsu
+    password: devsu
+
+  cloud.stream:
+    defaultBinder: rabbit
+    default.contentType: application/json
+    bindings.crearMovimientoMessageProcessor-in-0:
+      destination: movimientos
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+logging:
+  level:
+    org.springframework.r2dbc: DEBUG
+
+cuentams:
+  url: http://localhost:8081
+
+---
+spring:
+  config.activate.on-profile: docker
+  r2dbc:
+    url: r2dbc:postgresql://movimientodb:5432/movimientodb
+    username: user
+    password: pass
+
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
+
+cuentams:
+  url: http://cuentams:8081

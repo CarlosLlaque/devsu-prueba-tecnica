@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.cllaque.personams.Excepcion.ConflictException;
-import com.cllaque.personams.Excepcion.GenericException;
-import com.cllaque.personams.Excepcion.NotFoundException;
+import com.cllaque.personams.exception.ConflictException;
+import com.cllaque.personams.exception.GenericException;
+import com.cllaque.personams.exception.NotFoundException;
 
 @ControllerAdvice
 public class CustomExceptionHandler {

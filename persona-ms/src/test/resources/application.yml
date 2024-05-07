@@ -1,0 +1,17 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: persona-ms
+
+  r2dbc:
+    url: r2dbc:tc:postgresql:///devsujava?TC_IMAGE_TAG=9.6.8
+    # username: sa
+    # password: 
+# jdbc:postgresql://localhost:5432/devsujava
+logging:
+  level:
+    # root: DEBUG
+    org.springframework.r2dbc: DEBUG
+    # io.r2dbc: DEBUG

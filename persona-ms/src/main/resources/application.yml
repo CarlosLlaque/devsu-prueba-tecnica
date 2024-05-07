@@ -1,0 +1,48 @@
+springdoc:
+  swagger-ui.path: /openapi/swagger-ui.html
+  api-docs.path: /openapi/v3/api-docs
+  packagesToScan: com.cllaque.personams
+  pathsToMatch: /**
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: personams
+
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/devsujava
+    username: devsu
+    password: devsu
+
+  cloud.stream:
+    defaultBinder: rabbit
+    default.contentType: application/json
+    bindings.crearClienteMessageProcessor-in-0:
+      destination: clientes
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+logging:
+  level:
+    root: INFO
+    org.springframework.r2dbc: DEBUG
+
+---
+spring:
+  config.activate.on-profile: docker
+  r2dbc:
+    url: r2dbc:postgresql://personadb:5432/personadb
+    username: user
+    password: pass
+
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest

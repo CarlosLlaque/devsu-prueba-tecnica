@@ -1,0 +1,55 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: compositems
+
+  cloud.stream:
+    defaultBinder: rabbit
+    default.contentType: application/json
+    bindings:
+      clientes-out-0:
+        destination: clientes
+        producer:
+          required-groups: auditGroup
+
+      cuentas-out-0:
+        destination: cuentas
+        producer:
+          required-groups: auditGroup
+
+      movimientos-out-0:
+        destination: movimientos
+        producer:
+          required-groups: auditGroup
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+ms:
+  url:
+    persona: http://localhost:9080
+    cuenta: http://localhost:9081
+    movimiento: http://localhost:9082
+
+logging:
+  level:
+    root: INFO
+---
+spring:
+  config.activate.on-profile: docker
+
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
+ms:
+  url:
+    persona: http://personams:8080
+    cuenta: http://cuentams:8081
+    movimiento: http://movimientoms:8082

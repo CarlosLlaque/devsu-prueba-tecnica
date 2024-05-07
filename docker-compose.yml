@@ -1,28 +1,107 @@
-version: '3'
-
 networks:
   docker_red:
     driver: bridge
 
 services:
   personams:
-    image: cllaquec/devsu-prueba-tecnica:persona-ms
+    build: ./persona-ms
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
     networks:
       - docker_red
     ports:
       - 9080:8080
+    depends_on:
+      personadb:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
 
   cuentams:
-    image: cllaquec/devsu-prueba-tecnica:cuenta-ms
+    build: ./cuenta-ms
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
     networks:
       - docker_red
     ports:
       - 9081:8081
+    depends_on:
+      cuentadb:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
 
-  postgresdb:
-    image: cllaquec/devsu-prueba-tecnica:postgres-cllaque
+  movimientoms:
+    build: ./movimientoms
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
     networks:
       - docker_red
     ports:
-      - 54320:5432
+      - 9082:8082
+    depends_on:
+      movimientodb:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
 
+  personadb:
+    image: postgres:14.11-alpine
+    environment:
+      POSTGRES_USER: user 
+      POSTGRES_PASSWORD: pass 
+      POSTGRES_DB: personadb
+    networks:
+      - docker_red
+    healthcheck:
+      test: "/usr/local/bin/psql -U user -d personadb -c \"SELECT 1;\""
+      interval: 5s
+      timeout: 2s
+      retries: 60
+    ports:
+      - 54321:5432
+
+  cuentadb:
+    image: postgres:14.11-alpine
+    environment:
+      POSTGRES_USER: user 
+      POSTGRES_PASSWORD: pass 
+      POSTGRES_DB: cuentadb 
+    networks:
+      - docker_red
+    healthcheck:
+      test: "/usr/local/bin/psql -U user -d cuentadb -c \"SELECT 1;\""
+      interval: 5s
+      timeout: 2s
+      retries: 60
+    ports:
+      - 54322:5432
+
+  movimientodb:
+    image: postgres:14.11-alpine
+    environment:
+      POSTGRES_USER: user 
+      POSTGRES_PASSWORD: pass 
+      POSTGRES_DB: movimientodb 
+    networks:
+      - docker_red
+    healthcheck:
+      test: "/usr/local/bin/psql -U user -d movimientodb -c \"SELECT 1;\""
+      interval: 5s
+      timeout: 2s
+      retries: 60
+    ports:
+      - 54323:5432
+
+  rabbitmq:
+    image: rabbitmq:3.13.1-management
+    networks:
+      - docker_red
+    ports:
+      - 5672:5672
+      - 15672:15672
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 5s
+      timeout: 2s
+      retries: 60
