@@ -3,45 +3,51 @@ networks:
     driver: bridge
 
 services:
-  personams:
+  personaservice:
     build: ./persona-ms
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     networks:
       - docker_red
-    ports:
-      - 9080:8080
     depends_on:
       personadb:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
 
-  cuentams:
+  cuentaservice:
     build: ./cuenta-ms
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     networks:
       - docker_red
-    ports:
-      - 9081:8081
     depends_on:
       cuentadb:
         condition: service_healthy
       rabbitmq:
         condition: service_healthy
 
-  movimientoms:
+  movimientoservice:
     build: ./movimientoms
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     networks:
       - docker_red
-    ports:
-      - 9082:8082
     depends_on:
       movimientodb:
         condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+
+  compositeservice:
+    build: ./compositems/
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - docker_red
+    ports:
+      - 8080:8080
+    depends_on:
       rabbitmq:
         condition: service_healthy
 
@@ -105,3 +111,12 @@ services:
       interval: 5s
       timeout: 2s
       retries: 60
+
+  eurekaserver:
+    build: ./eurekaserver
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - docker_red
+    ports:
+      - 8761:8761

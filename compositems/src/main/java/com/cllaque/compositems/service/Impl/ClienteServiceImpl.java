@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class ClienteServiceImpl implements ClienteService{
-    @Value("${ms.url.persona}")
+    @Value("${eurekaurl.personams}")
     private String personaUrl;
     private final WebClient.Builder webClientBuilder;
     private final StreamBridge streamBridge;

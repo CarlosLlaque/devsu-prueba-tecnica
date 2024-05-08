@@ -17,7 +17,7 @@ import reactor.core.publisher.Mono;
 public class CuentaServiceImpl implements CuentaService{
 
     private final WebClient.Builder webClientBuilder;
-    @Value("${ms.url.cuenta}")
+    @Value("${eurekaurl.cuentams}")
     private String cuentaUrl;
     private final StreamBridge streamBridge;
 

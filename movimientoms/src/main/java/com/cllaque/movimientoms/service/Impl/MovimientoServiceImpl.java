@@ -28,7 +28,7 @@ public class MovimientoServiceImpl implements MovimientoService{
     private MovimientoRepository movimientoRepository;
     private final WebClient.Builder builder;
 
-    @Value("${cuentams.url}")
+    @Value("${eurekaurl.cuentams}")
     private String cuentaUrl;
 
     public MovimientoServiceImpl(MovimientoRepository movimientoRepository, WebClient.Builder builder){

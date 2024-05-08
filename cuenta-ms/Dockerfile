@@ -13,5 +13,5 @@ WORKDIR /app
 
 COPY --from=build /app/target/cuenta-ms.jar /app
 
-EXPOSE 8081
+EXPOSE 8080
 CMD ["java", "-jar", "cuenta-ms.jar"]

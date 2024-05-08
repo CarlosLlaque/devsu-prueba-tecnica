@@ -20,10 +20,10 @@ public class ReporteServiceImpl implements ReporteService{
     @Autowired
     private final WebClient.Builder builder;
 
-    @Value("${ms.url.cuenta}")
+    @Value("${eurekaurl.cuentams}")
     private String cuentaUrl;
 
-    @Value("${ms.url.movimiento}")
+    @Value("${eurekaurl.movimientoms}")
     private String movimientoUrl;
 
     public ReporteServiceImpl(WebClient.Builder builder){
