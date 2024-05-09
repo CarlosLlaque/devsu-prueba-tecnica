@@ -21,16 +21,33 @@ repositories {
 	mavenCentral()
 }
 
+ext {
+    resilience4jversion = '2.2.0'
+    springbootversion = '3.2.5'
+    springcloudversion = '2023.0.1'
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
-    implementation 'org.springframework.cloud:spring-cloud-starter-stream-rabbit:4.1.0'
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client:4.1.0'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'org.springframework.cloud:spring-cloud-starter-stream-rabbit'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+    implementation 'io.github.resilience4j:resilience4j-spring-boot3'
+    implementation 'io.github.resilience4j:resilience4j-reactor'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.cloud:spring-cloud-stream-test-binder'
 	testImplementation 'io.projectreactor:reactor-test'
-    testImplementation 'org.springframework.cloud:spring-cloud-stream-test-binder:4.1.1'
-    // testImplementation 'org.springframework.cloud:spring-cloud-stream-binder-test:3.2.10'
+}
+
+dependencyManagement {
+    imports{
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springcloudversion}"
+        mavenBom "org.springframework.boot:spring-boot-dependencies:${springbootversion}"
+        mavenBom "io.github.resilience4j:resilience4j-bom:${resilience4jversion}"
+    }
 }
 
 tasks.named('test') {

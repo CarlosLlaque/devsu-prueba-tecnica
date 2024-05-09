@@ -8,6 +8,6 @@ import reactor.core.publisher.Mono;
 public interface ClienteService {
     public Mono<ClienteResp> crearCliente(CrearClienteReq req);
     public Mono<Void> actualizarCliente(CrearClienteReq req);
-    public Mono<ClienteResp> obtenerCliente(String dni);
+    public Mono<ClienteResp> obtenerCliente(String dni, int delay, int faultPercent);
     public Mono<Void> eliminarCliente(String dni);
 }

@@ -6,6 +6,6 @@ import com.cllaque.compositems.dto.CrearClienteReq;
 import reactor.core.publisher.Mono;
 
 public interface ClienteService {
-    Mono<Cliente> obtenerCliente(String dni);
+    Mono<Cliente> obtenerCliente(String dni, int delaySeconds, int faultPercent);
     void crearCliente(CrearClienteReq req);
 }

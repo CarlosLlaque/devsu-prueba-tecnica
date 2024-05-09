@@ -53,6 +53,32 @@ ms:
 logging:
   level:
     root: INFO
+
+management.health.circuitbreakers.enabled: true
+
+resilience4j:
+  timelimiter:
+    instances:
+      cliente:
+        timeOutDuration: 2s
+
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+    instances:
+      cliente:
+        allowHealthIndicatorToFail: false
+        registerHealthIndicator: true
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10000
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+
+# management.endpoints.web.exposure.include: health,circuitbreakers
+management.endpoint.health.show-details: always
 ---
 spring:
   config.activate.on-profile: docker
@@ -67,3 +93,7 @@ ms:
     persona: http://personaservice:8080
     cuenta: http://cuentaservice:8080
     movimiento: http://movimientoservice:8080
+
+eureka:
+  client:
+    serviceUrl.defaultZone: http://eurekaserver:8761/eureka/

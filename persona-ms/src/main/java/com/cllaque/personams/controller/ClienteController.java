@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,8 +30,10 @@ public class ClienteController {
 
     @GetMapping("/{dni}")
     @ResponseStatus(HttpStatus.OK)
-    public Mono<ClienteResp> obtenerCliente(@PathVariable String dni){
-        return this.clienteService.obtenerCliente(dni);
+    public Mono<ClienteResp> obtenerCliente(@PathVariable String dni, @RequestParam(defaultValue = "0") int delay,
+        @RequestParam(defaultValue = "0") int faultPercent){
+        System.out.println("Obteniendo cliente");
+        return this.clienteService.obtenerCliente(dni, delay, faultPercent);
     }
 
     @PutMapping("/actualizar")

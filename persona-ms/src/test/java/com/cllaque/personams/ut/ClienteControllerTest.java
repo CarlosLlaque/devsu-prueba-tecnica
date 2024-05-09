@@ -43,7 +43,7 @@ public class ClienteControllerTest {
         clienteResp.setClienteId("asdfasdf-asdfasdf");
         clienteResp.setDireccion("Direccion");
 
-        when(clienteService.obtenerCliente("12312312")).thenReturn(Mono.just(clienteResp));
+        when(clienteService.obtenerCliente("12312312", 0, 0)).thenReturn(Mono.just(clienteResp));
 
         webClient.get()
             .uri("/clientes/12312312")
@@ -55,7 +55,7 @@ public class ClienteControllerTest {
 
     @Test
     public void obtenerCliente_NOT_FOUND(){
-        when(clienteService.obtenerCliente("12312312")).thenReturn(Mono.error(new NotFoundException("El cliente no existe")));
+        when(clienteService.obtenerCliente("12312312", 0, 0)).thenReturn(Mono.error(new NotFoundException("El cliente no existe")));
 
         webClient.get()
             .uri("/clientes/12312312")
