@@ -1,5 +1,5 @@
 server:
-  port: 8083
+  port: 8080
 
 spring:
   application:
@@ -30,15 +30,55 @@ spring:
     username: guest
     password: guest
 
+eureka:
+  client:
+    serviceUrl.defaultZone: http://localhost:8761/eureka/
+    initialInstanceInfoReplicationIntervalSeconds: 5
+    registryFetchIntervalSeconds: 5
+  instance:
+    leaseRenewalIntervalInSeconds: 5
+    leaseExpirationDurationInSeconds: 5
+
+eurekaurl:
+  personams: http://personams:8080
+  cuentams: http://cuentams:8080
+  movimientoms: http://movimientoms:8080
+
 ms:
   url:
-    persona: http://localhost:9080
-    cuenta: http://localhost:9081
-    movimiento: http://localhost:9082
+    persona: http://localhost:8080
+    cuenta: http://localhost:8080
+    movimiento: http://localhost:8080
 
 logging:
   level:
     root: INFO
+
+management.health.circuitbreakers.enabled: true
+
+resilience4j:
+  timelimiter:
+    instances:
+      cliente:
+        timeOutDuration: 2s
+
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+    instances:
+      cliente:
+        allowHealthIndicatorToFail: false
+        registerHealthIndicator: true
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10000
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+
+# management.endpoints.web.exposure.include: health,circuitbreakers
+management.endpoint.health.show-details: always
 ---
 spring:
   config.activate.on-profile: docker
@@ -50,6 +90,10 @@ spring:
     password: guest
 ms:
   url:
-    persona: http://personams:8080
-    cuenta: http://cuentams:8081
-    movimiento: http://movimientoms:8082
+    persona: http://personaservice:8080
+    cuenta: http://cuentaservice:8080
+    movimiento: http://movimientoservice:8080
+
+eureka:
+  client:
+    serviceUrl.defaultZone: http://eurekaserver:8761/eureka/

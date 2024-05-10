@@ -25,9 +25,9 @@ import reactor.core.publisher.Mono;
 public class CuentaServiceImpl implements CuentaService{
     private CuentaRepository cuentaRepository;
     private WebClient.Builder builder;
-    @Value("${personams.url}")
+    @Value("${eurekaurl.personams}")
     private String personaUrl;
-    @Value("${movimientoms.url}")
+    @Value("${eurekaurl.movimientoms}")
     private String movimientoUrl;
 
     public CuentaServiceImpl(CuentaRepository cuentaRepository, WebClient.Builder builder){

@@ -9,11 +9,14 @@ import com.cllaque.compositems.domain.Cliente;
 import com.cllaque.compositems.dto.CrearClienteReq;
 import com.cllaque.compositems.service.ClienteService;
 
+import io.github.resilience4j.circuitbreaker.CallNotPermittedException;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.timelimiter.annotation.TimeLimiter;
 import reactor.core.publisher.Mono;
 
 @Service
 public class ClienteServiceImpl implements ClienteService{
-    @Value("${ms.url.persona}")
+    @Value("${eurekaurl.personams}")
     private String personaUrl;
     private final WebClient.Builder webClientBuilder;
     private final StreamBridge streamBridge;
@@ -24,11 +27,18 @@ public class ClienteServiceImpl implements ClienteService{
         this.streamBridge = streamBridge;
     }
 
+    @TimeLimiter(name = "cliente")
+    @CircuitBreaker(name = "cliente", fallbackMethod = "obtenerClienteFallback")
     @Override
-    public Mono<Cliente> obtenerCliente(String dni) {
+    public Mono<Cliente> obtenerCliente(String dni, int delaySeconds, int faultPercent) {
         return this.webClientBuilder.baseUrl(personaUrl).build()
             .get()
-            .uri("/clientes/" + dni)
+            .uri(uriBuilder->uriBuilder
+                .path("/clientes/" + dni)
+                .queryParam("delay", delaySeconds)
+                .queryParam("faultPercent", faultPercent)
+                .build()
+            )
             .retrieve()
             .bodyToMono(Cliente.class);
     }
@@ -38,4 +48,15 @@ public class ClienteServiceImpl implements ClienteService{
         this.streamBridge.send("clientes-out-0", req);
     }
     
+    public Mono<Cliente> obtenerClienteFallback(String dni, int delay, int faultPercent, CallNotPermittedException e){
+        var cliente = new Cliente();
+        cliente.setDni("00000000");
+        cliente.setNombre("foo");
+        cliente.setGenero("foo");
+        cliente.setEdad(0);
+        cliente.setDireccion("foo");
+        cliente.setTelefono("000000000");
+
+        return Mono.just(cliente);
+    }
 }

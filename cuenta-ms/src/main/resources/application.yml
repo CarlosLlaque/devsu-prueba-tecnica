@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8080
 spring:
   application:
     name: cuentams
@@ -20,10 +20,23 @@ spring:
     username: guest
     password: guest
 
+eureka:
+  client:
+    serviceUrl.defaultZone: http://localhost:8761/eureka/
+    initialInstanceInfoReplicationIntervalSeconds: 5
+    registryFetchIntervalSeconds: 5
+  instance:
+    leaseRenewalIntervalInSeconds: 5
+    leaseExpirationDurationInSeconds: 5
+
+eurekaurl:
+  personams: http://personams:8080
+  movimientoms: http://movimientoms:8080
+
 personams:
   url: http://localhost:8080
 movimientoms:
-  url: http://localhost:8082
+  url: http://localhost:8080
 
 logging:
   level:
@@ -43,7 +56,9 @@ spring:
     username: guest
     password: guest
 
+eureka.client.serviceUrl.defaultZone: http://eurekaserver:8761/eureka/
+
 personams:
-  url: http://personams:8080
+  url: http://personaservice:8080
 movimientoms:
-  url: http://movimientoms:8082
+  url: http://movimientoservice:8080

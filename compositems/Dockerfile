@@ -1,15 +1,19 @@
 FROM gradle:8.7.0-jdk17-alpine as build
 
-WORKDIR /home/gradle/src
+WORKDIR /app
+COPY build.gradle settings.gradle ./
+COPY gradle ./gradle
 
-COPY --chown=gradle:gradle . /home/gradle/src
+RUN gradle build --no-daemon --info || return 0
 
-RUN gradle bootJar --no-daemon
+COPY ./src ./src
+
+RUN gradle bootJar --no-daemon --info
 
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
 
-COPY --from=build /home/gradle/src/build/libs/compositems*.jar /app/compositems.jar
+COPY --from=build /app/build/libs/compositems*.jar /app/compositems.jar
 
 EXPOSE 8080
 CMD ["java", "-jar", "compositems.jar"]

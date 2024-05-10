@@ -1,5 +1,7 @@
 package com.cllaque.personams.service.Impl;
 
+import java.time.Duration;
+import java.util.Random;
 import java.util.UUID;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -84,9 +86,15 @@ public class ClienteServiceImpl implements ClienteService{
     }
 
     @Override
-    public Mono<ClienteResp> obtenerCliente(String dni) {
+    public Mono<ClienteResp> obtenerCliente(String dni, int delay, int faultPercent) {
+        System.out.println("Delay in seconds: " + delay);
+        System.out.println("faul percent: " + faultPercent);
         return this.clienteRepository.findById(dni)
         .switchIfEmpty(Mono.error(new NotFoundException("El cliente no existe")))
+        // Added for testing Resilience4j
+        .map(cliente -> throwIfBadLuck(cliente, faultPercent))
+        .delayElement(Duration.ofSeconds(delay))
+        // end
         .map(cliente->{
             var clienteResp = new ClienteResp();
             clienteResp.setDni(cliente.getDni());
@@ -100,6 +108,22 @@ public class ClienteServiceImpl implements ClienteService{
 
             return clienteResp;
         });
+    }
+
+    private final Random randomNumberGenerator = new Random();
+
+    private Cliente throwIfBadLuck(Cliente cliente, int faultPercent) {
+        var randomNumber = this.randomNumberGenerator.nextInt(101);
+
+        if (faultPercent == 0){
+            return cliente;
+        }
+
+        if (randomNumber < faultPercent) {
+            throw new RuntimeException("Bad luck exception");
+        }
+
+        return cliente;
     }
 
     @Override

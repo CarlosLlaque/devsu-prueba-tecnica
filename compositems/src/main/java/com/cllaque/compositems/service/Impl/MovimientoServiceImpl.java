@@ -15,7 +15,7 @@ import reactor.core.publisher.Flux;
 public class MovimientoServiceImpl implements MovimientoService{
     private final WebClient.Builder builder;
     private final StreamBridge streamBridge;
-    @Value("${ms.url.movimiento}")
+    @Value("${eurekaurl.movimientoms}")
     private String movimientoUrl;
 
     public MovimientoServiceImpl(WebClient.Builder builder, StreamBridge streamBridge){
