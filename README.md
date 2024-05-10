@@ -10,7 +10,7 @@ A toy project that uses the following technologies:
 * database: postgresql
 * messages: rabbitmq, kafka
 
-# Components
+## Components
 There are 4 microservices
 * persona-ms
 * cuenta-ms
