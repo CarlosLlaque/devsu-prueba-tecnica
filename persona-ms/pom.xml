@@ -12,7 +12,7 @@
 	<artifactId>persona-ms</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>persona-ms</name>
-	<description>Demo project for Devsu</description>
+	<description>Microservicio persona</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>
@@ -24,6 +24,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>

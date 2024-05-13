@@ -45,8 +45,8 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     networks:
       - docker_red
-    ports:
-      - 8080:8080
+    # ports:
+    #   - 8080:8080
     depends_on:
       rabbitmq:
         condition: service_healthy
@@ -118,13 +118,13 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     networks:
       - docker_red
+    # ports:
+    #   - 8761:8761
+  gateway:
+    build: ./edgeserver
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - docker_red
     ports:
-      - 8761:8761
-  # gateway:
-  #   build: ./edgeserver
-  #   environment:
-  #     - SPRING_PROFILES_ACTIVE=docker
-  #   networks:
-  #     - docker_red
-  #   ports:
-  #     - 8080:8080
+      - 8080:8080
